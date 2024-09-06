@@ -1,0 +1,17 @@
+[
+    {
+        "question": "What is the capital of INDIA ?",
+        "options": ["Mumbai", "New Delhi", "Punjab", "Kerala"],
+        "answer": "New Delhi"
+    },
+    {
+        "question": "Which sport does Neeraj Chopra play ?",
+        "options": ["Running", "Swimming", "Javelin", "Archery"],
+        "answer": "Javelin"
+    },
+    {
+        "question": "Prime Minister of INDIA?",
+        "options": ["Narendra Modi", "Amit Shah", "Nitish Kumar", "Eknath Shinde"],
+        "answer": "Narendra Modi"
+    }
+]
