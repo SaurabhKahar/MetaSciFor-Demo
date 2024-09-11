@@ -1,0 +1,48 @@
+<!-- tracker/templates/tracker/dashboard.html -->
+<div class="container">
+    <div class="row">
+        <!-- Right-side user information and dashboard links -->
+        <div class="col-md-4">
+            <h3>Welcome, {{ request.user.username }}</h3>
+        </div>
+
+        <!-- Center section for income/expense tracking -->
+        <div class="col-md-8">
+            <h2 style="text-align: center;">Dashboard</h2>
+            <hr>
+            <h2>Total Income: ₹ {{ total_income }}</h2>
+            <h2>Total Expense: ₹ {{ total_expense }}</h2>
+            <h2>Total Balance: ₹{{ total_balance }}</h2>
+
+            <!-- Income section -->
+            <h3>Income</h3>
+            <ul>
+                {% for income in incomes %}
+                    <li>{{ income.source }}: ₹ {{ income.amount }} on {{ income.date }}</li>
+                {% empty %}
+                    <li>No income added yet.</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Expense section -->
+            <h3>Expenses</h3>
+            <!-- Assuming similar logic for expenses -->
+            <ul>
+                {% for expense in expenses %}
+                    <li>{{ expense.source }}: ₹ {{ expense.amount }} on {{ expense.date }}</li>
+                {% empty %}
+                    <li>No expense added yet.</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        <hr>
+        <div style="text-align: center;">
+            <a href="{% url 'add_income' %}">Add Income</a>   |  
+            <a href="{% url 'add_expense' %}">Add Expense</a>
+            <br>
+            <hr>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+</div>
