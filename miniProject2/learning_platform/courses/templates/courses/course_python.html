@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Course</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Light Theme */
+        body.light {
+            background: #ffffff;
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+        }
+        .light .sidebar {
+            background-color: #f8f9fa;
+        }
+        .light .user-greeting {
+            color: #343a40;
+        }
+        .light .content-area h1, .light .content-area p {
+            color: #000000;
+        }
+        .light .content-area a {
+            color: #0056b3;
+        }
+
+        /* Dark Theme */
+        body.dark {
+            background: #222222;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+        }
+        .dark .sidebar {
+            background-color: #343a40;
+            color: #f0f0f0;
+        }
+        .dark .user-greeting {
+            color: #f0f0f0;
+        }
+        .dark .content-area h1, .dark .content-area p {
+            color: #ffffff;
+        }
+        .dark .content-area a {
+            color: #1e90ff;
+        }
+
+        /* Shared Styles */
+        .user-greeting {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .sidebar {
+            padding: 15px;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+            position: fixed;
+            width: 250px;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .content-area {
+            margin-left: 270px;
+            padding: 20px;
+        }
+        .toggle-btn {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            z-index: 1001;
+        }
+        .sidebar h4 {
+            margin-bottom: 15px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .sidebar ul li a:hover {
+            color: #0056b3;
+        }
+        .content-area h1 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- <div class="user-greeting">Hello, {{ user.username }}!</div> -->
+        <button class="btn btn-secondary toggle-btn" onclick="toggleSidebar()">Menu</button>
+        <button class="btn btn-primary toggle-theme user-greeting" onclick="toggleTheme()">Switch Theme</button>
+        
+        <div class="sidebar" id="sidebar">
+            <br><br>
+            <h4>Python Course Menu</h4>
+            <ul>
+                <li><a href="#" onclick="loadContent('intro')">Introduction</a></li>
+                <li><a href="#" onclick="loadContent('data_types')">Data Types</a></li>
+                <li><a href="#" onclick="loadContent('control_structures')">Control Structures</a></li>
+                <li><a href="#" onclick="loadContent('functions')">Functions</a></li>
+                <li><a href="#" onclick="loadContent('data_structures')">Data Structures</a></li>
+                <li><a href="#" onclick="loadContent('file_handling')">File Handling</a></li>
+                <li><a href="#" onclick="loadContent('libraries')">Popular Libraries</a></li>
+                <li><a href="#" onclick="loadContent('oop')">Object-Oriented Programming</a></li>
+                <li><a href="#" onclick="loadContent('advanced')">Advanced Topics</a></li>
+            </ul>
+        </div>
+        
+        <div class="content-area">
+            <h1>Python Course Content</h1>
+            <p id="course-content">Welcome to the Python course! Click on the menu items to load the content.</p>
+            <a href="{% url 'main_page' %}" class="btn btn-primary" style="color: white;">Back to Main Page</a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Sidebar Functionality
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.display = (sidebar.style.display === 'none' || sidebar.style.display === '') ? 'block' : 'none';
+        }
+
+        // Load Course Content Dynamically
+        function loadContent(topic) {
+            let content = '';
+            switch(topic) {
+                case 'intro':
+                    content = "<h2>What is Python?</h2> <p>Python is a high-level, interpreted programming language known for its ease of learning and readability. <br>It supports multiple programming paradigms, including procedural, object-oriented, and functional programming. <br>Python was created by Guido van Rossum and was first released in 1991.</p> <h2>Why Use Python</h2> <p>Python is widely used in web development, data analysis, artificial intelligence, scientific computing, and automation. <br>Its extensive libraries and frameworks, such as Django and Flask, make it a powerful choice for building applications. <br>Python's syntax is designed to be easy to read and write, making it an excellent choice for beginners.</p>";
+                    break;
+                case 'data_types':
+                    content = '<h2>Basic Data Types</h2><p>Python has several built-in data types:</p><table class="table table-bordered"><thead><tr><th>Data Type</th><th>Description</th></tr></thead><tbody><tr><td>int</td><td>Stores whole numbers.</td></tr><tr><td>float</td><td>Stores fractional numbers.</td></tr><tr><td>str</td><td>Stores strings of text.</td></tr><tr><td>list</td><td>Stores an ordered collection of items.</td></tr><tr><td>dict</td><td>Stores key-value pairs.</td></tr></tbody></table>';
+                    break;
+                case 'control_structures':
+                    content = '<h2>Control Structures in Python</h2><p>Python provides several control structures for flow control:</p><ul><li><strong>if statement:</strong> Executes a block of code if the condition is true. <code>if x &gt; 0: print("Positive")</code></li><li><strong>else statement:</strong> Executes a block of code if the condition in the if statement is false. <code>if x &gt; 0: print("Positive") else: print("Non-positive")</code></li><li><strong>for loop:</strong> Repeats a block of code for a specified number of times. <code>for i in range(5): print(i)</code></li><li><strong>while loop:</strong> Repeats a block of code while a condition is true. <code>while x &lt; 5: print(x); x += 1</code></li></ul>';
+                    break;
+                case 'data_structures':
+                    content = '<h2>Data Structures in Python</h2><p>Python offers a variety of built-in data structures to store collections of data:</p><ul><li><strong>Lists:</strong> Ordered, mutable collections of items. Example: <code>my_list = [1, 2, 3]</code></li><li><strong>Tuples:</strong> Ordered, immutable collections of items. Example: <code>my_tuple = (1, 2, 3)</code></li><li><strong>Dictionaries:</strong> Unordered collections of key-value pairs. Example: <code>my_dict = {"name": "Alice", "age": 30}</code></li><li><strong>Sets:</strong> Unordered collections of unique items. Example: <code>my_set = {1, 2, 3}</code></li></ul>';
+                    break;
+                case 'file_handling':
+                    content = '<h2>File Handling in Python</h2><p>Python provides built-in functions to handle files:</p><ul><li><strong>Opening a File:</strong> Use <code>open(filename, mode)</code>. Modes include <code>"r"</code> (read), <code>"w"</code> (write), and <code>"a"</code> (append).</li><li><strong>Reading from a File:</strong> Use <code>file.read()</code> to read the entire file or <code>file.readline()</code> to read a single line.</li><li><strong>Writing to a File:</strong> Use <code>file.write("content")</code> to write data to a file.</li><li><strong>Closing a File:</strong> Always close a file after use with <code>file.close()</code>.</li></ul>';
+                    break;
+                case 'libraries':
+                    content = '<h2>Popular Libraries in Python</h2><p>Python has a rich ecosystem of libraries:</p><ul><li><strong>Numpy:</strong> For numerical computations and working with arrays.</li><li><strong>Pandas:</strong> For data manipulation and analysis.</li><li><strong>Matplotlib:</strong> For creating static, animated, and interactive visualizations.</li><li><strong>Requests:</strong> For making HTTP requests.</li><li><strong>Django:</strong> A high-level web framework for building web applications.</li><li><strong>Flask:</strong> A lightweight web framework for small to medium web applications.</li></ul>';
+                    break;
+                case 'oop':
+                    content = '<h2>Object-Oriented Programming in Python</h2><p>Python supports Object-Oriented Programming (OOP) principles:</p><ul><li><strong>Classes:</strong> A blueprint for creating objects. Example: <code>class Dog:</code></li><li><strong>Objects:</strong> Instances of classes. Example: <code>my_dog = Dog()</code></li><li><strong>Inheritance:</strong> Mechanism to create a new class using properties of an existing class. Example: <code>class Labrador(Dog):</code></li><li><strong>Encapsulation:</strong> Hiding the internal state of an object. Example: using private variables.</li><li><strong>Polymorphism:</strong> Ability to use a common interface for different data types. Example: method overriding.</li></ul>';
+                    break;
+                case 'advanced':
+                    content = '<h2>Advanced Topics in Python</h2><p>Some advanced concepts in Python include:</p><ul><li><strong>Decorators:</strong> Functions that modify the behavior of other functions. Example: <code>@decorator</code></li><li><strong>Generators:</strong> Functions that return an iterator. Use the <code>yield</code> keyword. Example: <code>def my_generator(): yield 1</code></li><li><strong>Context Managers:</strong> Used for resource management, implemented using the <code>with</code> statement. Example: <code>with open("file.txt") as f:</code></li><li><strong>Async Programming:</strong> Allows writing concurrent code using <code>async/await</code>.</li></ul>';
+                    break;
+                default:
+                    content = '<h2>Error</h2><p>Content not found.</p>';
+                    break;
+            }
+            document.getElementById('course-content').innerHTML = content;
+        }
+
+        // Theme Toggle and Persistence
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.className;
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.className = newTheme;
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme on page load
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.className = savedTheme;
+        };
+    </script>
+</body>
+</html>
